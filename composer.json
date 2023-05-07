@@ -2,6 +2,7 @@
   "name": "carrental/carrental",
     "type": "project",
   "description": "Software per la gestione di una flotta di veicoli con relative prenotazioni",
+  "license": "GPL-3.0-or-later",
   "authors": [
     {
       "name": "Oscar Di Manno",
