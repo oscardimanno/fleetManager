@@ -1,0 +1,21 @@
+{
+  "name": "carrental/carrental",
+    "type": "project",
+  "description": "Software per la gestione di una flotta di veicoli con relative prenotazioni",
+  "authors": [
+    {
+      "name": "Oscar Di Manno",
+      "email": "oscar.dimanno1@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "require": {
+    "ext-pdo": "*",
+    "symfony/http-foundation": "^6.2",
+    "ext-http": "*"
+  }
+}
