@@ -20,6 +20,11 @@ jobs:
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
+
+    - name: Installa dipendenze php
+      run: add-apt-repository -y ppa:ondrej/php && apt-get update && apt-get install -y --force-yes
+
+
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v3
@@ -29,11 +34,10 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-php-
 
-    - name: Install dependencies
+    - name: Installo dipendenze composer
       run: composer install --prefer-dist --no-progress
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
+
 
     # - name: Run test suite
     #   run: composer run-script test
