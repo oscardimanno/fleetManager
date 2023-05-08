@@ -22,7 +22,7 @@ jobs:
 
 
     - name: Installa dipendenze php
-      run: add-apt-repository -y ppa:ondrej/php && apt-get update && apt-get install -y --force-yes
+      run: sudo add-apt-repository -y ppa:ondrej/php && sudo apt-get update && sudo apt-get install -y --force-yes
 
 
     - name: Cache Composer packages
