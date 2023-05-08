@@ -16,7 +16,6 @@
   },
   "require": {
     "ext-pdo": "*",
-    "symfony/http-foundation": "^6.2",
-    "ext-http": "*"
+    "symfony/http-foundation": "^6.2"
   }
 }
