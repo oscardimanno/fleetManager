@@ -37,10 +37,10 @@ class router
         $this->map["DELETE"][$path] = $controller;
     }
 
-    public function resolve()
+    public function run()
     {
         $method = $_SERVER["REQUEST_METHOD"];
-        $path = $_SERVER["PATH_INFO"] ?? "/";
+        $path = $_SERVER["REQUEST_URI"] ?? "/";
         $controller = $this->map[$method][$path] ?? null;
         if(!$controller){
             echo "Page not found";

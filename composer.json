@@ -16,6 +16,7 @@
   },
   "require": {
     "ext-pdo": "*",
-    "symfony/http-foundation": "^6.2"
+    "symfony/http-foundation": "^6.2",
+    "filp/whoops": "^2.15"
   }
 }

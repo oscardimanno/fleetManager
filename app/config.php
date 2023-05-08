@@ -3,7 +3,7 @@
 const APP_DIR = __DIR__ . '/../app/';
 const MYSQL_HOST = "localhost";
 const MYSQL_USER = "root";
-const MYSQL_PASSWORD = "";
+const MYSQL_PASSWORD = "1234";
 const MYSQL_DB = "flotta";
 const MYSQL_PORT = "3306";
 const MYSQL_CHARSET = "utf8mb4";
