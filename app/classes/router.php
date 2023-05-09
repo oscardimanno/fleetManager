@@ -1,11 +1,16 @@
 <?php
 
 namespace App\classes;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class router
 {
 
     protected $map;
+
+
+    public $middleware = [];
 
     public function __construct()
     {
@@ -39,13 +44,37 @@ class router
 
     public function run()
     {
-        $method = $_SERVER["REQUEST_METHOD"];
-        $path = $_SERVER["REQUEST_URI"] ?? "/";
+
+        $request = Request::createFromGlobals();
+        $response = new Response();
+
+        $method = $request->getMethod();
+        $path = $request->getRequestUri() ?? "/";
         $controller = $this->map[$method][$path] ?? null;
-        if(!$controller){
-            echo "Page not found";
-            exit;
+
+//        //Todo: implementare il parsing dei parametri
+//        preg_match_all('/\{([^\}]*)\}/', $path, $matches);
+//        $matches = $matches[1];
+//        $data = [];
+//        foreach ($matches as $match) {
+//            $data[$match] = $request->get($match);
+//        }
+//
+//        $controller = $controller ? function () use ($controller, $data) {
+//            return $controller($data);
+//        } : null;
+
+
+
+        //Implementa la chiamata al middleware
+        foreach($this->middleware as $middleware){
+            list($request, $response) = $middleware($request, $response);
         }
-        echo call_user_func($controller);
+
+        if(!$controller){
+            die;
+        }
+
+        return call_user_func($controller);
     }
 }
