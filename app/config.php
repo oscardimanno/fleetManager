@@ -1,6 +1,8 @@
 <?php
 
 const APP_DIR = __DIR__ . '/../app/';
+
+const _ENV = "dev";
 const MYSQL_HOST = "localhost";
 const MYSQL_USER = "root";
 const MYSQL_PASSWORD = "1234";
