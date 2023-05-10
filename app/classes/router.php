@@ -1,6 +1,8 @@
 <?php
 
 namespace App\classes;
+
+use App\middleware\define\MiddlewareChain;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -65,16 +67,33 @@ class router
 //        } : null;
 
 
-
         //Implementa la chiamata al middleware
-        foreach($this->middleware as $middleware){
-            list($request, $response) = $middleware($request, $response);
-        }
+        //foreach($this->middleware as $key => $middleware){
+        //    $response = $middleware($request, $this->middleware[$key+1] ?? null, $this->middleware[$key+2] ?? null);
+        //}
 
-        if(!$controller){
-            die;
-        }
+        //if (!$controller) {
+        //    die;
+        //}
 
-        return call_user_func($controller);
+        $middlewareChain = new MiddlewareChain();
+
+        $middlewareChain->addMiddleware(new \App\middleware\LoggerMiddleware());
+        $middlewareChain->addMiddleware(new \App\middleware\AuthMiddleware());
+        $middlewareChain->addMiddleware(new \App\middleware\CacheMiddleware());
+        $request = $middlewareChain->handleRequest($request);
+        if ($request) {
+            $controllerRes = call_user_func($controller);
+            $response->setContent($controllerRes);
+            $response = $middlewareChain->handleResponse($response);
+            if ($response) {
+                $response->send();
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        return false;
     }
 }
